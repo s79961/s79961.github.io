@@ -55,12 +55,14 @@
             border-radius: var(--border-radius);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
             border: 1px solid var(--color-medium-grey);
-            transition: transform 0.2s ease-in-out;
+            /* Added transition for scale effect */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
         }
 
+        /* Hover effect added here */
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            transform: scale(1.02); /* Subtle scale up/zoom */
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
         }
 
         .card h2 {
@@ -83,46 +85,53 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            
+            /* --- BACKGROUND IMAGE ADDED HERE --- */
+            background-image: url('bg.jpg'); 
+            background-size: cover;          
+            background-position: center;     
+            background-repeat: no-repeat;    
+            /* Fallback background color in case image fails to load */
+            background-color: #333; 
+            /* Text color changed for visibility against dark image */
+            color: var(--color-white);       
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
         }
 
+        /* Profile Text Styling Overrides for Background Image */
+        .card-profile h1,
+        .card-profile p,
+        .card-profile .tagline {
+            color: var(--color-white); 
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+            border-left-color: var(--color-white); /* Change border accent for tagline */
+        }
+        
         .profile-header h1 {
-            font-size: 2rem;
-            color: var(--color-dark-grey);
-            margin-bottom: var(--spacing-small);
+            color: var(--color-white);
         }
 
-        .profile-header p {
-            font-size: 1.1rem;
-            color: var(--color-accent);
-            font-weight: 500;
-            margin-bottom: var(--spacing-large);
-        }
-
-        .tagline {
-            font-style: italic;
-            font-size: 1.1rem;
-            color: var(--color-dark-grey);
-            margin-top: var(--spacing-medium);
-            padding-left: var(--spacing-medium);
-            border-left: 3px solid var(--color-accent);
-        }
-
+        /* Profile Social Links Styling Overrides */
         .social-links a {
             display: inline-block;
             margin-right: var(--spacing-medium);
-            color: var(--color-accent);
+            color: var(--color-white); /* Link text color is white */
             text-decoration: none;
             font-weight: 600;
             padding: 5px 10px;
-            border: 1px solid var(--color-accent);
+            border: 1px solid var(--color-white); /* Border is white */
             border-radius: 4px;
             transition: background-color 0.2s;
+            background-color: rgba(0, 0, 0, 0.3); /* Subtle dark background for visibility */
+            text-shadow: none; /* Remove text shadow from links */
         }
 
         .social-links a:hover {
-            background-color: var(--color-accent);
+            background-color: var(--color-accent); /* Use ocean blue on hover */
+            border-color: var(--color-accent);
             color: var(--color-white);
         }
+
 
         /* Card 2: Location - Small Box */
         .card-location {
@@ -140,6 +149,32 @@
             font-weight: 600;
             color: var(--color-dark-grey);
         }
+
+        /* Card 5: Hobby - Small Box */
+        .card-hobby {
+            grid-area: hobby;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .card-hobby p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        /* Card 7: Reflection - New Card */
+        .card-reflection {
+            grid-area: reflection;
+        }
+        .card-reflection p {
+            font-size: 1.0rem;
+            font-weight: 500;
+            color: var(--color-dark-grey);
+            margin-top: var(--spacing-small);
+        }
+
 
         /* Card 3: Tech Stack - Medium Box */
         .card-tech-stack {
@@ -166,20 +201,6 @@
             margin-bottom: var(--spacing-small);
         }
 
-        /* Card 5: Hobby - Small Box */
-        .card-hobby {
-            grid-area: hobby;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .card-hobby p {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--color-accent);
-        }
-
         /* Card 6: Playlist - Wide Box */
         .card-playlist {
             grid-area: playlist;
@@ -201,29 +222,44 @@
 
         @media (min-width: 768px) {
             .dashboard-grid {
-                /* Define the grid areas for easier placement */
+                /* Updated grid template to fit the new 'reflection' card next to 'hobby' */
                 grid-template-areas:
-                    "profile profile location"
-                    "profile profile hobby"
-                    "tech-stack case-study case-study"
-                    "playlist playlist playlist";
+                    "profile profile location hobby"
+                    "profile profile reflection reflection"
+                    "tech-stack case-study case-study case-study"
+                    "playlist playlist playlist playlist";
 
-                /* Define column and row sizes */
-                grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
-                grid-template-rows: auto auto auto auto; /* Auto height for rows */
+                /* Four columns for better balance with the new card */
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-template-rows: auto auto auto auto;
             }
 
-            /* Adjust card heights/span for desktop */
+            /* Adjust card sizes for the new 4-column layout */
             .card-profile {
                 /* Occupies 2 columns and 2 rows */
-                min-height: 400px; /* Ensure sufficient height */
+                min-height: 400px; 
+            }
+            
+            .card-location {
+                min-height: 180px;
             }
 
-            .card-location, .card-hobby {
-                min-height: 192px; /* Roughly half of profile card height (400px - 16px gap / 2) */
+            .card-hobby {
+                min-height: 180px;
+            }
+            
+            .card-reflection {
+                /* Occupies 2 columns in the second row */
+                min-height: 180px;
             }
 
-            .card-tech-stack, .card-case-study {
+            .card-tech-stack {
+                /* Standard size */
+                min-height: 300px;
+            }
+            
+            .card-case-study {
+                /* Occupies 3 columns in the third row */
                 min-height: 300px;
             }
         }
@@ -235,6 +271,7 @@
                 grid-template-areas:
                     "profile profile"
                     "location hobby"
+                    "reflection reflection"
                     "tech-stack case-study"
                     "playlist playlist";
                 grid-template-columns: 1fr 1fr;
@@ -263,9 +300,9 @@
                 <p>First-year student at UMT exploring the fundamental sciences underpinning food quality and preservation. Focused on building a strong base in laboratory techniques and theoretical knowledge.</p>
             </div>
             <div class="social-links">
-                <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                <a href="#" aria-label="GitHub">GitHub</a>
-                <a href="#" aria-label="UMT Portal">UMT Portal</a>
+                <a href="#" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+                <a href="#" target="_blank" aria-label="GitHub">GitHub</a>
+                <a href="#" target="_blank" aria-label="UMT Portal">UMT Portal</a>
             </div>
         </div>
 
@@ -273,13 +310,18 @@
             <h2>Current Location</h2>
             <p>UMT Campus, Kuala Nerus</p>
             <div class="time">
-                14:30 PM (Dec 14, 2025)
+                15:33 PM
             </div>
         </div>
 
         <div class="card card-hobby">
             <h2>Leisure Activity</h2>
             <p>Evening walks at Pantai UMT</p>
+        </div>
+
+        <div class="card card-reflection">
+            <h2>Why Food Tech Matters in Malaysia</h2>
+            <p>Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.</p>
         </div>
 
         <div class="card card-tech-stack">
@@ -295,15 +337,14 @@
         <div class="card card-case-study">
             <h2>Recent Case Study</h2>
             <p class="case-study-title">Starch Gelatinization in Local Kuih</p>
-            <p>**Description:** Analyzing texture profiles, specifically stickiness and firmness, of **Kuih Lapis** in relation to the degree of starch gelatinization achieved during the steaming process. This helps optimize the traditional recipe for industrial production.</p>
+            <p>**Description:** Analyzing texture profiles, specifically stickiness and firmness, of Kuih Lapis in relation to the degree of starch gelatinization achieved during the steaming process. This helps optimize the traditional recipe for industrial production.</p>
             <p style="margin-top: 15px; font-size: 0.85rem; color: #718096;">Focus Area: Food Texture and Rheology.</p>
         </div>
 
-        <div class="card card-playlist">
-            <h2>Focus Playlist</h2>
-            <p>Instrumental tracks for concentration during study hours.</p>
-            <div class="playlist-placeholder">
-                [Placeholder for Embedded Music Player / Study Soundtrack]
+        <div id="card-playlist" class="grid-card">
+            <h2 class="card-title">Study Focus Playlist</h2>
+            <p style="font-weight: 300;"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6TBJkXHPhu3EsMk1bshwuI?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></p>
+            <p style="font-size: 0.85rem; opacity: 0.8;">Classical music for deep concentration.</p>
             </div>
         </div>
 
