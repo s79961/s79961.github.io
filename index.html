@@ -3,25 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Science Portfolio</title>
+    <title>Aeynul Mardyyah | Food Science Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* CSS Reset and Global Styles */
         :root {
-            /* Color Palette */
             --color-white: #ffffff;
-            --color-light-grey: #f4f7f9; /* Soft background */
-            --color-medium-grey: #e0e6eb; /* Card/border separators */
-            --color-dark-grey: #4a5568; /* Text color */
-            --color-accent: #004d99; /* Deep Ocean Blue (UMT Theme) */
-            --color-accent-light: #e6f0ff; /* Light accent background */
-
-            /* Spacing */
-            --spacing-small: 8px;
+            --color-light-grey: #f4f7f9;
+            --color-medium-grey: #e0e6eb;
+            --color-dark-grey: #4a5568;
+            --color-accent: #004d99; /* UMT Ocean Blue */
+            --color-accent-light: #e6f0ff;
             --spacing-medium: 16px;
             --spacing-large: 24px;
-
-            /* Radius */
             --border-radius: 12px;
         }
 
@@ -36,286 +29,182 @@
             background-color: var(--color-light-grey);
             color: var(--color-dark-grey);
             line-height: 1.6;
-            min-height: 100vh;
             padding: var(--spacing-medium);
         }
 
-        /* Container for the Grid Layout */
         .dashboard-grid {
             display: grid;
             gap: var(--spacing-medium);
-            max-width: 1200px; /* Max width for desktop view */
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Generic Card Styling */
-        .card {
+        /* Card Base Styles */
+        .card, .grid-card {
             background-color: var(--color-white);
             padding: var(--spacing-large);
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--color-medium-grey);
-            /* Added transition for scale effect */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
         }
 
-        /* Hover effect added here */
-        .card:hover {
-            transform: scale(1.02); /* Subtle scale up/zoom */
-            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        /* Hover Zoom Effect */
+        .card:hover, .grid-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .card h2 {
-            font-size: 1.25rem;
-            margin-bottom: var(--spacing-medium);
+        h2.card-title, .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
             color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             font-weight: 700;
         }
 
-        .card p {
-            font-size: 0.95rem;
-            color: #718096;
-        }
-
-        /* Specific Card Styles */
-
-        /* Card 1: Profile - Large Box */
+        /* Profile Card */
         .card-profile {
             grid-area: profile;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            
-            /* --- BACKGROUND IMAGE ADDED HERE --- */
-            background-image: url('bg.jpg'); 
-            background-size: cover;          
-            background-position: center;     
-            background-repeat: no-repeat;    
-            /* Fallback background color in case image fails to load */
-            background-color: #333; 
-            /* Text color changed for visibility against dark image */
-            color: var(--color-white);       
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
+            min-height: 380px;
         }
 
-        /* Profile Text Styling Overrides for Background Image */
-        .card-profile h1,
-        .card-profile p,
-        .card-profile .tagline {
-            color: var(--color-white); 
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
-            border-left-color: var(--color-white); /* Change border accent for tagline */
-        }
-        
-        .profile-header h1 {
-            color: var(--color-white);
+        .card-profile h1 { font-size: 1.8rem; margin-bottom: 5px; color: white; }
+        .card-profile .tagline { 
+            font-style: italic; 
+            border-left: 3px solid white; 
+            padding-left: 10px; 
+            margin: 15px 0;
         }
 
-        /* Profile Social Links Styling Overrides */
         .social-links a {
             display: inline-block;
-            margin-right: var(--spacing-medium);
-            color: var(--color-white); /* Link text color is white */
+            margin-right: 10px;
+            color: white;
             text-decoration: none;
-            font-weight: 600;
-            padding: 5px 10px;
-            border: 1px solid var(--color-white); /* Border is white */
-            border-radius: 4px;
-            transition: background-color 0.2s;
-            background-color: rgba(0, 0, 0, 0.3); /* Subtle dark background for visibility */
-            text-shadow: none; /* Remove text shadow from links */
+            padding: 6px 12px;
+            border: 1px solid white;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: 0.3s;
         }
-
         .social-links a:hover {
-            background-color: var(--color-accent); /* Use ocean blue on hover */
-            border-color: var(--color-accent);
-            color: var(--color-white);
-        }
-
-
-        /* Card 2: Location - Small Box */
-        .card-location {
-            grid-area: location;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background-color: var(--color-accent-light);
-            border: 1px solid var(--color-accent);
-        }
-
-        .card-location .time {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--color-dark-grey);
-        }
-
-        /* Card 5: Hobby - Small Box */
-        .card-hobby {
-            grid-area: hobby;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .card-hobby p {
-            font-size: 1.1rem;
-            font-weight: 600;
+            background: white;
             color: var(--color-accent);
         }
 
-        /* Card 7: Reflection - New Card */
-        .card-reflection {
-            grid-area: reflection;
-        }
-        .card-reflection p {
-            font-size: 1.0rem;
-            font-weight: 500;
-            color: var(--color-dark-grey);
-            margin-top: var(--spacing-small);
-        }
-
-
-        /* Card 3: Tech Stack - Medium Box */
-        .card-tech-stack {
-            grid-area: tech-stack;
-        }
-        .tech-list li {
-            list-style: none;
-            padding: var(--spacing-small) 0;
-            border-bottom: 1px dashed var(--color-medium-grey);
-            font-weight: 500;
-        }
-        .tech-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Card 4: Case Study - Medium Box */
-        .card-case-study {
-            grid-area: case-study;
-        }
-        .case-study-title {
-            font-weight: 600;
-            color: var(--color-dark-grey);
-            font-size: 1.05rem;
-            margin-bottom: var(--spacing-small);
-        }
-
-        /* Card 6: Playlist - Wide Box */
-        .card-playlist {
-            grid-area: playlist;
-        }
-
-        .playlist-placeholder {
-            height: 150px;
-            background-color: #333;
-            color: var(--color-white);
+        /* Location Card */
+        .card-location {
+            grid-area: location;
+            background-color: var(--color-accent-light);
+            text-align: center;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            font-size: 1.2rem;
-            border-radius: 8px;
-            margin-top: var(--spacing-medium);
+        }
+        #current-time {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--color-accent);
+            margin-top: 5px;
         }
 
-        /* --- RESPONSIVENESS (Grid Layout for Desktop) --- */
+        /* Case Study Card with Button Column */
+        .card-case {
+            grid-area: case;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 768px) {
+            .case-content-wrapper {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                gap: var(--spacing-large);
+                align-items: center;
+            }
+        }
+
+        .btn-timer {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            border: 2px solid var(--color-accent);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-timer:hover {
+            background-color: transparent;
+            color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        /* Layout Mapping */
+        .card-hobby { grid-area: hobby; text-align: center; }
+        .card-reflection { grid-area: reflection; }
+        .card-tech { grid-area: tech; }
+        #card-playlist { grid-area: playlist; }
 
         @media (min-width: 768px) {
             .dashboard-grid {
-                /* Updated grid template to fit the new 'reflection' card next to 'hobby' */
                 grid-template-areas:
                     "profile profile location hobby"
                     "profile profile reflection reflection"
-                    "tech-stack case-study case-study case-study"
+                    "tech case case case"
                     "playlist playlist playlist playlist";
-
-                /* Four columns for better balance with the new card */
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                grid-template-rows: auto auto auto auto;
-            }
-
-            /* Adjust card sizes for the new 4-column layout */
-            .card-profile {
-                /* Occupies 2 columns and 2 rows */
-                min-height: 400px; 
-            }
-            
-            .card-location {
-                min-height: 180px;
-            }
-
-            .card-hobby {
-                min-height: 180px;
-            }
-            
-            .card-reflection {
-                /* Occupies 2 columns in the second row */
-                min-height: 180px;
-            }
-
-            .card-tech-stack {
-                /* Standard size */
-                min-height: 300px;
-            }
-            
-            .card-case-study {
-                /* Occupies 3 columns in the third row */
-                min-height: 300px;
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
-        /* Optional: Smaller adjustment for tablets */
-        @media (min-width: 480px) and (max-width: 767px) {
+        @media (max-width: 767px) {
             .dashboard-grid {
-                /* Two column layout for smaller tablets */
-                grid-template-areas:
-                    "profile profile"
-                    "location hobby"
-                    "reflection reflection"
-                    "tech-stack case-study"
-                    "playlist playlist";
-                grid-template-columns: 1fr 1fr;
+                grid-template-areas: "profile" "location" "hobby" "reflection" "tech" "case" "playlist";
             }
-
-            .card-profile {
-                 min-height: 300px;
-            }
+            .btn-timer { margin-top: 15px; width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div class="dashboard-grid">
-
         <div class="card card-profile">
-            <div class="profile-header">
-                <h1>AEYNUL MARDYYAH BINTI ZAINAL ABIDIN</h1>
-                <p>BSc. Food Science (Honours) - Year 1</p>
-                <div class="tagline">
-                    'Innovating food safety.'
-                </div>
-            </div>
             <div>
-                <h2>Profile Summary</h2>
-                <p>First-year student at UMT exploring the fundamental sciences underpinning food quality and preservation. Focused on building a strong base in laboratory techniques and theoretical knowledge.</p>
+                <h1>AEYNUL MARDYYAH BINTI ZAINAL ABIDIN</h1>
+                <p>Food Science | Year 1</p>
+                <p class="tagline">'Innovating food safety.'</p>
             </div>
             <div class="social-links">
-                <a href="#" target="_blank" aria-label="LinkedIn">LinkedIn</a>
-                <a href="#" target="_blank" aria-label="GitHub">GitHub</a>
-                <a href="#" target="_blank" aria-label="UMT Portal">UMT Portal</a>
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">GitHub</a>
+                <a href="#" target="_blank">UMT Portal</a>
             </div>
         </div>
 
         <div class="card card-location">
-            <h2>Current Location</h2>
-            <p>UMT Campus, Kuala Nerus</p>
-            <div class="time">
-                15:33 PM
-            </div>
+            <h2>Location</h2>
+            <p>UMT, Kuala Nerus</p>
+            <div id="current-time">00:00:00</div>
         </div>
 
         <div class="card card-hobby">
-            <h2>Leisure Activity</h2>
+            <h2>Hobby</h2>
             <p>Evening walks at Pantai UMT</p>
         </div>
 
@@ -324,31 +213,44 @@
             <p>Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.</p>
         </div>
 
-        <div class="card card-tech-stack">
-            <h2>Core Subjects & Tools</h2>
-            <ul class="tech-list">
-                <li>Food Chemistry (Fundamentals)</li>
-                <li>General Microbiology</li>
-                <li>Data Analysis (Excel Proficiency)</li>
-                <li>Basic Lab Analysis</li>
-            </ul>
+        <div class="card card-tech">
+            <h2>Subjects</h2>
+            <p>• Food Chemistry<br>• Microbiology<br>• Excel<br>• Lab Analysis</p>
         </div>
 
-        <div class="card card-case-study">
-            <h2>Recent Case Study</h2>
-            <p class="case-study-title">Starch Gelatinization in Local Kuih</p>
-            <p>**Description:** Analyzing texture profiles, specifically stickiness and firmness, of Kuih Lapis in relation to the degree of starch gelatinization achieved during the steaming process. This helps optimize the traditional recipe for industrial production.</p>
-            <p style="margin-top: 15px; font-size: 0.85rem; color: #718096;">Focus Area: Food Texture and Rheology.</p>
+        <div class="card card-case">
+            <h2>Case Study: Starch Gelatinization</h2>
+            <div class="case-content-wrapper">
+                <div class="case-text">
+                    <p><strong>Analyzing texture profiles of Kuih Lapis.</strong> Examining the chemical changes in local starches during heat processing to ensure consistent food quality and structural integrity.</p>
+                </div>
+                <div class="case-action">
+                    <a href="https://s79961.github.io/lab-timer-app/" target="_blank" class="btn-timer">Try My Lab Timer App</a>
+                </div>
+            </div>
         </div>
 
         <div id="card-playlist" class="grid-card">
             <h2 class="card-title">Study Focus Playlist</h2>
-            <p style="font-weight: 300;"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6TBJkXHPhu3EsMk1bshwuI?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></p>
+            <p style="margin-bottom: 10px;">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6EtXpBUmPm7fyhUGnca7hr?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </p>
             <p style="font-size: 0.85rem; opacity: 0.8;">Classical music for deep concentration.</p>
-            </div>
         </div>
-
     </div>
+
+    <script>
+        function updateTime() {
+            const timeDisplay = document.getElementById('current-time');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            timeDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
 
 </body>
 </html>
